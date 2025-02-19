@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Signup Form</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            width: 400px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background: #2c2c2c;
+            color: white;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Student Signup</h2>
+        <form name="StudenSignupForm" onsubmit="return validateHTMLform()">
+            <label>First Name:</label>
+            <input type="text" name="textnames">
+
+            <label>Last Name:</label>
+            <input type="text" name="lastnames">
+
+            <label>Father's Name:</label>
+            <input type="text" name="fathername">
+
+            <label>Postal Address:</label>
+            <input type="text" name="paddress">
+
+            <label>Personal Address:</label>
+            <input type="text" name="personaladdress">
+
+            <label>Gender:</label>
+            <input type="radio" name="sex" value="male"> Male
+            <input type="radio" name="sex" value="female"> Female
+
+            <label>City:</label>
+            <select name="City">
+                <option value="-1">Select City</option>
+                <option value="New York">New York</option>
+                <option value="Los Angeles">Los Angeles</option>
+            </select>
+
+            <label>Email:</label>
+            <input type="text" name="emailid">
+
+            <label>DOB:</label>
+            <input type="date" name="dob">
+
+            <label>Mobile No:</label>
+            <input type="text" name="mobileno">
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function validateHTMLform() {
+            let form = document.forms["StudenSignupForm"];
+
+            if (form.textnames.value.trim() === "") {
+                alert("Enter Your First Name!");
+                form.textnames.focus();
+                return false;
+            }
+
+            if (form.lastnames.value.trim() === "") {
+                alert("Enter Your Last Name!");
+                form.lastnames.focus();
+                return false;
+            }
+
+            if (form.fathername.value.trim() === "") {
+                alert("Enter Your Father's Name!");
+                form.fathername.focus();
+                return false;
+            }
+
+            if (form.paddress.value.trim() === "") {
+                alert("Enter Your Postal Address!");
+                form.paddress.focus();
+                return false;
+            }
+
+            if (form.personaladdress.value.trim() === "") {
+                alert("Enter Your Personal Address!");
+                form.personaladdress.focus();
+                return false;
+            }
+
+            if (!form.sex[0].checked && !form.sex[1].checked) {
+                alert("Choose Your Gender: Male or Female");
+                return false;
+            }
+
+            if (form.City.value === "-1") {
+                alert("Enter Your City!");
+                form.City.focus();
+                return false;
+            }
+
+            let email = form.emailid.value.trim();
+            let atpos = email.indexOf("@");
+            let dotpos = email.lastIndexOf(".");
+            if (email === "" || atpos < 1 || dotpos - atpos < 2) {
+                alert("Enter a valid email ID!");
+                form.emailid.focus();
+                return false;
+            }
+
+            if (form.dob.value.trim() === "") {
+                alert("Enter your DOB!");
+                form.dob.focus();
+                return false;
+            }
+
+            if (
+                form.mobileno.value.trim() === "" ||
+                isNaN(form.mobileno.value) ||
+                form.mobileno.value.length !== 10
+            ) {
+                alert("Enter your Mobile No. in the format ##########.");
+                form.mobileno.focus();
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+</body>
+</html>
